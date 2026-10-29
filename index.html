@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d2b4e">
+<meta name="robots" content="noindex, nofollow">
+<title>Gintonici Albinetana Volley - Presenze</title>
+<style>
+:root{--bg:#f2f5f9;--card:#fff;--tx:#0d2b4e;--mut:#64748b;--pri:#1f5fcf;--y:#f5b800;--ok:#15803d;--no:#c62828;--bd:#dde4ee;--tr:#e8edf4}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1626;--card:#13233b;--tx:#e8eef8;--mut:#9aabc3;--pri:#6ea4ff;--bd:#25395a;--tr:#1d3150;--ok:#4ade80;--no:#f87171}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 "Avenir Next","Segoe UI",system-ui,sans-serif;padding-bottom:24px}
+header{background:#0d2b4e;color:#fff;padding:14px 16px;border-bottom:4px solid var(--y);display:flex;align-items:center;gap:14px}
+header #logo{width:56px;height:56px;object-fit:contain;background:#fff;border-radius:50%;padding:3px;flex:none}
+header h1{margin:0;font-size:20px;letter-spacing:.2px}
+header p{margin:2px 0 0;font-size:13px;opacity:.75}
+main{max-width:720px;margin:0 auto;padding:16px}
+nav{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--bd);display:flex;z-index:5}
+nav button{flex:1;border:0;background:none;color:var(--mut);padding:14px 4px 11px;font:inherit;font-size:15px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent}
+nav button.on{color:var(--pri);border-bottom-color:var(--pri)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:12px}
+h2{font-size:17px;margin:0 0 10px}
+.row{display:flex;align-items:center;gap:12px}
+.grow{flex:1;min-width:0}
+.mut{color:var(--mut);font-size:13px}
+.btn{border:0;border-radius:8px;padding:10px 14px;font:inherit;font-weight:600;cursor:pointer;background:var(--pri);color:#fff}
+.btn.sec{background:var(--tr);color:var(--tx)}
+.btn.wa{background:#1fa855}
+.btn.sm{padding:6px 10px;font-size:13px}
+.btn:focus-visible,nav button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--y);outline-offset:1px}
+.av{width:48px;height:48px;border-radius:50%;object-fit:cover;background:var(--tr);display:grid;place-items:center;font-weight:700;color:var(--mut);flex:none}
+.bar{height:8px;background:var(--tr);border-radius:4px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--pri)}
+.pct{font-weight:700;font-size:18px;min-width:52px;text-align:right}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal .h{font-size:12px;color:var(--mut);padding:4px 0}
+.cal button{aspect-ratio:1/1;border:1px solid transparent;background:none;color:var(--tx);border-radius:8px;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.cal button.today{border-color:var(--pri)}
+.cal button.sel{background:var(--pri);color:#fff}
+.dots{display:flex;gap:3px;height:6px}
+.dots b{width:6px;height:6px;border-radius:50%;background:var(--pri)}
+.dots b.m{background:var(--y)}
+.sel .dots b{box-shadow:0 0 0 1px #fff}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--tr)}
+.tag.m{background:var(--y);color:#3b2d00}
+.ans{display:flex;gap:8px;margin-top:10px}
+.ans button{flex:1;border:2px solid var(--bd);background:none;color:var(--tx);border-radius:8px;padding:9px;font:inherit;font-weight:600;cursor:pointer}
+.ans .si.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.ans .no.on{background:var(--no);border-color:var(--no);color:#fff}
+label{display:block;font-size:13px;font-weight:600;margin:12px 0 4px}
+textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;font:inherit;background:var(--card);color:var(--tx);resize:vertical}
+input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;font:inherit;background:var(--card);color:var(--tx)}
+dialog{border:0;border-radius:14px;padding:18px;width:min(92vw,420px);background:var(--card);color:var(--tx)}
+dialog::backdrop{background:rgba(5,15,30,.55)}
+.mn{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.empty{text-align:center;color:var(--mut);padding:22px 8px}
+.warn{background:#fff4d6;color:#4a3600;border:1px solid var(--y);border-radius:12px;padding:14px}
+details summary{cursor:pointer;font-size:13px;color:var(--pri);margin-top:8px}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#0d2b4e;color:#fff;padding:9px 16px;border-radius:99px;font-size:14px;z-index:9}
+@media(prefers-reduced-motion:no-preference){.bar i{transition:width .4s}}
+</style>
+</head>
+<body>
+<header>
+<img id="logo" src="logo.png" alt="Logo della squadra" onerror="this.style.display='none'">
+<div><h1>Gintonici Albinetana Volley</h1><p id="sub">Presenze ad allenamenti e partite</p></div>
+</header>
+<nav>
+<button data-t="cal" class="on">Calendario</button>
+<button data-t="team">Squadra</button>
+<button data-t="me">Il mio profilo</button>
+</nav>
+<main id="app"></main>
+
+<dialog id="dlg">
+<h2>Nuovo evento</h2>
+<label for="e-type">Tipo</label>
+<select id="e-type"><option value="allenamento">Allenamento</option><option value="partita">Partita</option></select>
+<label for="e-title">Titolo (es. avversario)</label>
+<input id="e-title" placeholder="Allenamento tecnico / vs Volley Rimini">
+<label for="e-date">Data e ora</label>
+<input id="e-date" type="datetime-local">
+<label for="e-place">Luogo</label>
+<input id="e-place" placeholder="Palestra comunale">
+<div class="row" style="margin-top:16px;justify-content:flex-end">
+<button class="btn sec" id="e-cancel">Annulla</button><button class="btn" id="e-save">Salva evento</button>
+</div>
+</dialog>
+
+<dialog id="dlgA">
+<h2>Aggiungi atleti</h2>
+<label for="a-names">Scrivi un nome per riga</label>
+<textarea id="a-names" rows="9" placeholder="Mario Rossi&#10;Giulia Bianchi&#10;Luca Verdi"></textarea>
+<p class="mut">Ogni atleta potrà poi scegliere il proprio nome e completare ruolo e foto.</p>
+<div class="row" style="margin-top:12px;justify-content:flex-end">
+<button class="btn sec" id="a-cancel">Annulla</button><button class="btn" id="a-save">Aggiungi alla squadra</button>
+</div>
+</dialog>
+
+<script type="module">
+/* ====== 1) INCOLLA QUI LA CONFIGURAZIONE DEL TUO PROGETTO FIREBASE ====== */
+const firebaseConfig = {
+  apiKey: "AIzaSyA0tht5RO0NtR_W7NIgMjISxLULYgUypPk",
+  authDomain: "gintonici-albinetana-volley.firebaseapp.com",
+  projectId: "gintonici-albinetana-volley",
+  appId: "1:589027576484:web:f94e0f3e85c493458ff431"
+};
+/* ======================================================================== */
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, doc, setDoc, addDoc, updateDoc, deleteDoc, onSnapshot }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const $ = s => document.querySelector(s);
+const app = $("#app");
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ROLES = ["Palleggio","Opposto","Banda","Centrale","Libero"];
+const MESI = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
+const S = { ath: [], ev: [], me: localStorage.getItem("me") || "", tab: "cal", m: new Date(), sel: "", photo: "" };
+S.m.setDate(1);
+
+if (firebaseConfig.apiKey === "INCOLLA_QUI") {
+  app.innerHTML = `<div class="warn"><b>Configurazione mancante.</b><br>Apri il file <code>index.html</code> e incolla i dati del tuo progetto Firebase nella sezione "firebaseConfig". Segui la guida di installazione.</div>`;
+  throw new Error("Firebase non configurato");
+}
+const db = getFirestore(initializeApp(firebaseConfig));
+const colA = collection(db, "athletes"), colE = collection(db, "events");
+onSnapshot(colA, s => { S.ath = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => a.name.localeCompare(b.name)); if (!S.ath.some(a => a.id === S.me)) S.me = ""; render(); });
+onSnapshot(colE, s => { S.ev = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => a.dt.localeCompare(b.dt)); render(); });
+
+const isPast = e => new Date(e.dt) < new Date();
+const ymd = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const fmt = e => { const d = new Date(e.dt); return d.toLocaleDateString("it-IT",{weekday:"short",day:"numeric",month:"short"}) + " · " + d.toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"}); };
+const ini = n => n.trim().split(/\s+/).map(w => w[0]).slice(0,2).join("").toUpperCase();
+const av = a => a.photo ? `<img class="av" src="${a.photo}" alt="${esc(a.name)}">` : `<div class="av" aria-hidden="true">${esc(ini(a.name))}</div>`;
+const athPct = a => { const p = S.ev.filter(isPast); if (!p.length) return null; return Math.round(p.filter(e => e.att?.[a.id] === "si").length / p.length * 100); };
+const evPct = e => S.ath.length ? Math.round(Object.entries(e.att||{}).filter(([id,v]) => v === "si" && S.ath.some(a => a.id === id)).length / S.ath.length * 100) : 0;
+const toast = t => { const el = document.createElement("div"); el.className = "toast"; el.textContent = t; document.body.append(el); setTimeout(() => el.remove(), 2200); };
+
+function waShare(text) { window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank"); }
+
+function evCard(e) {
+  const mine = e.att?.[S.me], pct = evPct(e);
+  const who = k => S.ath.filter(a => e.att?.[a.id] === k).map(a => esc(a.name));
+  const si = who("si"), no = who("no"), nr = S.ath.filter(a => !e.att?.[a.id]).map(a => esc(a.name));
+  return `<div class="card">
+  <div class="row"><div class="grow"><span class="tag ${e.type==="partita"?"m":""}">${e.type==="partita"?"Partita":"Allenamento"}</span>
+  <div style="font-weight:700;margin-top:4px">${esc(e.title || (e.type==="partita"?"Partita":"Allenamento"))}</div>
+  <div class="mut">${fmt(e)}${e.place ? " · " + esc(e.place) : ""}</div></div>
+  <div class="pct" title="Presenze della squadra">${pct}%</div></div>
+  <div class="bar" role="img" aria-label="Presenze squadra ${pct}%"><i style="width:${pct}%"></i></div>
+  <div class="mut" style="margin-top:4px">${si.length} presenti su ${S.ath.length} atleti</div>
+  ${S.me ? `<div class="ans"><button class="si ${mine==="si"?"on":""}" data-a="${e.id}|si">Ci sono</button><button class="no ${mine==="no"?"on":""}" data-a="${e.id}|no">Non ci sono</button></div>` : `<p class="mut">Vai su “Il mio profilo” per scegliere il tuo nome.</p>`}
+  <details><summary>Chi viene</summary>
+  <p class="mut"><b>Presenti:</b> ${si.join(", ") || "—"}<br><b>Assenti:</b> ${no.join(", ") || "—"}<br><b>Senza risposta:</b> ${nr.join(", ") || "—"}</p></details>
+  <div class="row" style="margin-top:10px;gap:8px"><button class="btn wa sm" data-w="${e.id}">Condividi su WhatsApp</button><button class="btn sec sm" data-d="${e.id}">Elimina</button></div>
+  </div>`;
+}
+
+function viewCal() {
+  const who = !S.me && S.ath.length ? `<div class="card"><div class="row"><div class="grow"><b>Chi sei?</b><div class="mut">Scegli il tuo nome per indicare le presenze.</div></div><button class="btn" data-t="me">Scegli il tuo nome</button></div></div>` : "";
+  const y = S.m.getFullYear(), mo = S.m.getMonth(), first = (new Date(y, mo, 1).getDay() + 6) % 7, days = new Date(y, mo + 1, 0).getDate();
+  let g = ["L","M","M","G","V","S","D"].map(d => `<div class="h">${d}</div>`).join("") + "<span></span>".repeat(first);
+  for (let d = 1; d <= days; d++) {
+    const k = ymd(new Date(y, mo, d)), es = S.ev.filter(e => e.dt.startsWith(k));
+    g += `<button data-day="${k}" class="${k===ymd(new Date())?"today":""} ${k===S.sel?"sel":""}" aria-label="${d} ${MESI[mo]}${es.length?", "+es.length+" eventi":""}">${d}<span class="dots">${es.slice(0,3).map(e => `<b class="${e.type==="partita"?"m":""}"></b>`).join("")}</span></button>`;
+  }
+  const list = S.ev.filter(e => S.sel ? e.dt.startsWith(S.sel) : e.dt.startsWith(`${y}-${String(mo+1).padStart(2,"0")}`));
+  return who + `<div class="card"><div class="mn"><button class="btn sec sm" data-mm="-1" aria-label="Mese precedente">‹</button><h2 style="margin:0">${MESI[mo]} ${y}</h2><button class="btn sec sm" data-mm="1" aria-label="Mese successivo">›</button></div>
+  <div class="cal">${g}</div>
+  <div class="mut" style="margin-top:8px"><b style="color:var(--pri)">●</b> Allenamento &nbsp; <b style="color:var(--y)">●</b> Partita</div></div>
+  <div class="row" style="margin-bottom:10px"><h2 class="grow" style="margin:0">${S.sel ? "Eventi del " + S.sel.split("-").reverse().join("/") : "Eventi del mese"}</h2>${S.sel ? `<button class="btn sec sm" data-clr="1">Tutto il mese</button>` : ""}<button class="btn" data-new="1">+ Evento</button></div>
+  ${list.length ? list.map(evCard).join("") : `<div class="empty card">Nessun evento. Premi “+ Evento” per aggiungere un allenamento o una partita.</div>`}`;
+}
+
+function viewTeam() {
+  const past = S.ev.filter(isPast).length;
+  return `<div class="row" style="margin-bottom:6px"><h2 class="grow" style="margin:0">Presenze della stagione</h2><button class="btn" data-addath="1">+ Atleti</button></div><p class="mut">Calcolate su ${past} eventi già svolti.</p>` +
+  (S.ath.length ? S.ath.map(a => { const p = athPct(a); return `<div class="card"><div class="row">${av(a)}<div class="grow"><div style="font-weight:700">${esc(a.name)}</div><div class="mut">${esc(a.role || "Ruolo da scegliere")}</div>
+  <div class="bar"><i style="width:${p ?? 0}%"></i></div></div><div class="pct">${p === null ? "–" : p + "%"}</div></div><div style="text-align:right;margin-top:8px"><button class="btn sec sm" data-delath="${a.id}">Rimuovi</button></div></div>`; }).join("")
+  : `<div class="empty card">Nessun atleta in squadra. Premi “+ Atleti” per inserire tutti i nomi.</div>`);
+}
+
+function viewMe() {
+  const me = S.ath.find(a => a.id === S.me);
+  const pick = !me && S.ath.length ? `<div class="card"><h2>Sei già in squadra?</h2><label for="pick">Scegli il tuo nome dall’elenco</label><select id="pick"><option value="">Scegli…</option>${S.ath.map(a => `<option value="${a.id}">${esc(a.name)}</option>`).join("")}</select></div>` : "";
+  return pick + `<div class="card"><h2>${me ? "Il mio profilo" : "Crea il tuo profilo"}</h2>
+  <div class="row"><div id="prev">${me || S.photo ? av({name: me?.name || "?", photo: S.photo || me?.photo}) : `<div class="av">?</div>`}</div><div class="grow"><label for="ph" style="margin:0 0 4px">Foto profilo</label><input id="ph" type="file" accept="image/*"></div></div>
+  <label for="nm">Nome e cognome</label><input id="nm" value="${esc(me?.name || "")}" autocomplete="name">
+  <label for="rl">Ruolo</label><select id="rl"><option value="" ${me?.role ? "" : "selected"}>Scegli il ruolo</option>${ROLES.map(r => `<option ${me?.role===r?"selected":""}>${r}</option>`).join("")}</select>
+  <div class="row" style="margin-top:16px"><button class="btn" id="save">Salva profilo</button>${me ? `<button class="btn sec" id="out">Non sono io</button>` : ""}</div></div>
+  <div class="card"><h2>Invita la squadra</h2><p class="mut">Invia il link dell’app nel gruppo WhatsApp.</p><button class="btn wa" id="inv">Condividi su WhatsApp</button></div>`;
+}
+
+function render() {
+  if (document.activeElement && /INPUT|SELECT/.test(document.activeElement.tagName) && S.tab === "me") return;
+  app.innerHTML = S.tab === "cal" ? viewCal() : S.tab === "team" ? viewTeam() : viewMe();
+  document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.t === S.tab));
+}
+
+function resize(file) {
+  return new Promise(res => { const img = new Image(); img.onload = () => { const c = document.createElement("canvas"), n = 200, s = Math.min(img.width, img.height); c.width = c.height = n; c.getContext("2d").drawImage(img, (img.width-s)/2, (img.height-s)/2, s, s, 0, 0, n, n); res(c.toDataURL("image/jpeg", .72)); }; img.src = URL.createObjectURL(file); });
+}
+
+document.addEventListener("click", async ev => {
+  const t = ev.target.closest("button"); if (!t) return;
+  const D = t.dataset;
+  if (D.t) { S.tab = D.t; return render(); }
+  if (D.addath) return $("#dlgA").showModal();
+  if (D.delath) { const a = S.ath.find(x => x.id === D.delath); if (confirm("Rimuovere " + a.name + " dalla squadra?")) { await deleteDoc(doc(db, "athletes", a.id)); if (S.me === a.id) { S.me = ""; localStorage.removeItem("me"); } } return; }
+  if (D.mm) { S.m.setMonth(S.m.getMonth() + +D.mm); S.sel = ""; return render(); }
+  if (D.day) { S.sel = S.sel === D.day ? "" : D.day; return render(); }
+  if (D.clr) { S.sel = ""; return render(); }
+  if (D.new) { $("#e-date").value = (S.sel || ymd(new Date())) + "T18:30"; return $("#dlg").showModal(); }
+  if (D.a) { if (!S.me) return; const [id, v] = D.a.split("|"), e = S.ev.find(x => x.id === id); const cur = e.att?.[S.me]; return updateDoc(doc(db, "events", id), { ["att." + S.me]: cur === v ? "" : v }); }
+  if (D.d) { if (confirm("Eliminare questo evento?")) deleteDoc(doc(db, "events", D.d)); return; }
+  if (D.w) { const e = S.ev.find(x => x.id === D.w); return waShare(`🏐 ${e.type === "partita" ? "Partita" : "Allenamento"}: ${e.title || ""}\n📅 ${fmt(e)}${e.place ? "\n📍 " + e.place : ""}\n\nConferma la tua presenza qui: ${location.href.split("#")[0]}`); }
+  if (t.id === "inv") return waShare("🏐 Ciao squadra! Da qui potete segnare la presenza ad allenamenti e partite: " + location.href.split("#")[0]);
+  if (t.id === "out") { localStorage.removeItem("me"); S.me = ""; S.photo = ""; return render(); }
+  if (t.id === "save") {
+    const name = $("#nm").value.trim(); if (!name) return toast("Inserisci il tuo nome");
+    const data = { name, role: $("#rl").value }, cur = S.ath.find(a => a.id === S.me);
+    data.photo = S.photo || cur?.photo || "";
+    t.disabled = true;
+    if (S.me) await setDoc(doc(db, "athletes", S.me), data); else { const r = await addDoc(colA, data); S.me = r.id; localStorage.setItem("me", r.id); }
+    S.photo = ""; t.disabled = false; toast("Profilo salvato"); S.tab = "cal"; render();
+  }
+});
+document.addEventListener("change", async ev => {
+  if (ev.target.id === "pick" && ev.target.value) { S.me = ev.target.value; localStorage.setItem("me", S.me); ev.target.blur(); render(); }
+  if (ev.target.id === "ph" && ev.target.files[0]) { S.photo = await resize(ev.target.files[0]); $("#prev").innerHTML = av({ name: "?", photo: S.photo }); }
+});
+$("#a-cancel").onclick = () => $("#dlgA").close();
+$("#a-save").onclick = async () => {
+  const have = new Set(S.ath.map(a => a.name.toLowerCase()));
+  const names = [...new Set($("#a-names").value.split("\n").map(n => n.trim()).filter(Boolean))].filter(n => !have.has(n.toLowerCase()));
+  if (!names.length) return toast("Nessun nuovo nome da aggiungere");
+  await Promise.all(names.map(name => addDoc(colA, { name, role: "", photo: "" })));
+  $("#a-names").value = ""; $("#dlgA").close(); toast(names.length + " atleti aggiunti");
+};
+$("#e-cancel").onclick = () => $("#dlg").close();
+$("#e-save").onclick = async () => {
+  const dt = $("#e-date").value; if (!dt) return toast("Scegli data e ora");
+  await addDoc(colE, { type: $("#e-type").value, title: $("#e-title").value.trim(), dt, place: $("#e-place").value.trim(), att: {} });
+  $("#e-title").value = ""; $("#e-place").value = ""; $("#dlg").close(); S.sel = dt.slice(0, 10); S.m = new Date(dt.slice(0, 7) + "-01T00:00"); render();
+};
+render();
+</script>
+</body>
+</html>
