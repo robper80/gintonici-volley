@@ -17,7 +17,7 @@ header h1{margin:0;font-size:20px;letter-spacing:.2px}
 header p{margin:2px 0 0;font-size:13px;opacity:.75}
 main{max-width:720px;margin:0 auto;padding:16px}
 nav{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--bd);display:flex;z-index:5}
-nav button{flex:1;border:0;background:none;color:var(--mut);padding:14px 4px 11px;font:inherit;font-size:15px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent}
+nav button{flex:1;border:0;background:none;color:var(--mut);padding:14px 4px 11px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent}
 nav button.on{color:var(--pri);border-bottom-color:var(--pri)}
 .card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:12px}
 h2{font-size:17px;margin:0 0 10px}
@@ -59,6 +59,15 @@ dialog::backdrop{background:rgba(5,15,30,.55)}
 details summary{cursor:pointer;font-size:13px;color:var(--pri);margin-top:8px}
 .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#0d2b4e;color:#fff;padding:9px 16px;border-radius:99px;font-size:14px;z-index:9}
 @media(prefers-reduced-motion:no-preference){.bar i{transition:width .4s}}
+.res{font-size:30px;font-weight:800;letter-spacing:1px;line-height:1}
+.res.w{color:var(--ok)}.res.l{color:var(--no)}
+.sets{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.sets span{background:var(--tr);border-radius:6px;padding:3px 9px;font-size:13px;font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.stats b{display:block;font-size:26px}
+.srow{display:grid;grid-template-columns:52px 1fr 14px 1fr;gap:8px;align-items:center;margin-top:6px}
+.srow input{text-align:center}
+.tag.w{background:var(--ok);color:#fff}.tag.l{background:var(--no);color:#fff}
 </style>
 </head>
 <body>
@@ -68,6 +77,7 @@ details summary{cursor:pointer;font-size:13px;color:var(--pri);margin-top:8px}
 </header>
 <nav>
 <button data-t="cal" class="on">Calendario</button>
+<button data-t="match">Partite</button>
 <button data-t="team">Squadra</button>
 <button data-t="me">Il mio profilo</button>
 </nav>
@@ -85,6 +95,25 @@ details summary{cursor:pointer;font-size:13px;color:var(--pri);margin-top:8px}
 <input id="e-place" placeholder="Palestra comunale">
 <div class="row" style="margin-top:16px;justify-content:flex-end">
 <button class="btn sec" id="e-cancel">Annulla</button><button class="btn" id="e-save">Salva evento</button>
+</div>
+</dialog>
+
+<dialog id="dlgM">
+<h2 id="m-h">Nuova partita</h2>
+<label for="m-opp">Avversario</label>
+<input id="m-opp" placeholder="Volley Rimini">
+<label for="m-date">Data</label>
+<input id="m-date" type="date">
+<label>Punti per set</label>
+<div class="srow" style="margin-top:0"><span></span><span class="mut" style="text-align:center">Noi</span><span></span><span class="mut" style="text-align:center">Avversari</span></div>
+<div class="srow"><span class="mut">Set 1</span><input type="number" inputmode="numeric" min="0" max="99" id="m-u1" aria-label="Punti nostri set 1"><b>-</b><input type="number" inputmode="numeric" min="0" max="99" id="m-t1" aria-label="Punti avversari set 1"></div>
+<div class="srow"><span class="mut">Set 2</span><input type="number" inputmode="numeric" min="0" max="99" id="m-u2" aria-label="Punti nostri set 2"><b>-</b><input type="number" inputmode="numeric" min="0" max="99" id="m-t2" aria-label="Punti avversari set 2"></div>
+<div class="srow"><span class="mut">Set 3</span><input type="number" inputmode="numeric" min="0" max="99" id="m-u3" aria-label="Punti nostri set 3"><b>-</b><input type="number" inputmode="numeric" min="0" max="99" id="m-t3" aria-label="Punti avversari set 3"></div>
+<div class="srow"><span class="mut">Set 4</span><input type="number" inputmode="numeric" min="0" max="99" id="m-u4" aria-label="Punti nostri set 4"><b>-</b><input type="number" inputmode="numeric" min="0" max="99" id="m-t4" aria-label="Punti avversari set 4"></div>
+<div class="srow"><span class="mut">Set 5</span><input type="number" inputmode="numeric" min="0" max="99" id="m-u5" aria-label="Punti nostri set 5"><b>-</b><input type="number" inputmode="numeric" min="0" max="99" id="m-t5" aria-label="Punti avversari set 5"></div>
+<p class="mut">Lascia vuoti i set non giocati.</p>
+<div class="row" style="margin-top:12px;justify-content:flex-end">
+<button class="btn sec" id="m-cancel">Annulla</button><button class="btn" id="m-save">Salva partita</button>
 </div>
 </dialog>
 
@@ -117,7 +146,7 @@ const app = $("#app");
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ROLES = ["Palleggio","Opposto","Banda","Centrale","Libero"];
 const MESI = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
-const S = { ath: [], ev: [], me: localStorage.getItem("me") || "", tab: "cal", m: new Date(), sel: "", photo: "" };
+const S = { ath: [], ev: [], mt: [], editM: "", me: localStorage.getItem("me") || "", tab: "cal", m: new Date(), sel: "", photo: "" };
 S.m.setDate(1);
 
 if (firebaseConfig.apiKey === "INCOLLA_QUI") {
@@ -125,9 +154,11 @@ if (firebaseConfig.apiKey === "INCOLLA_QUI") {
   throw new Error("Firebase non configurato");
 }
 const db = getFirestore(initializeApp(firebaseConfig));
-const colA = collection(db, "athletes"), colE = collection(db, "events");
+const colA = collection(db, "athletes"), colE = collection(db, "events"), colM = collection(db, "matches");
 onSnapshot(colA, s => { S.ath = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => a.name.localeCompare(b.name)); if (!S.ath.some(a => a.id === S.me)) S.me = ""; render(); });
 onSnapshot(colE, s => { S.ev = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => a.dt.localeCompare(b.dt)); render(); });
+
+onSnapshot(colM, s => { S.mt = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.date || "").localeCompare(a.date || "")); render(); });
 
 const isPast = e => new Date(e.dt) < new Date();
 const ymd = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
@@ -174,6 +205,36 @@ function viewCal() {
   ${list.length ? list.map(evCard).join("") : `<div class="empty card">Nessun evento. Premi “+ Evento” per aggiungere un allenamento o una partita.</div>`}`;
 }
 
+const setsOf = m => Array.isArray(m.sets) ? m.sets : [];
+const wonS = m => setsOf(m).filter(x => x.us > x.them).length;
+const lostS = m => setsOf(m).filter(x => x.us < x.them).length;
+function viewMatch() {
+  const W = S.mt.filter(m => wonS(m) > lostS(m)).length, L = S.mt.filter(m => wonS(m) < lostS(m)).length;
+  const cards = S.mt.map(m => {
+    const w = wonS(m), l = lostS(m), pu = setsOf(m).reduce((t, x) => t + x.us, 0), pt = setsOf(m).reduce((t, x) => t + x.them, 0);
+    const cls = w > l ? "w" : w < l ? "l" : "";
+    const d = new Date(m.date + "T00:00").toLocaleDateString("it-IT", { weekday: "short", day: "numeric", month: "short", year: "numeric" });
+    return `<div class="card"><div class="row"><div class="grow"><span class="tag ${cls}">${cls === "w" ? "Vittoria" : cls === "l" ? "Sconfitta" : "Partita"}</span>
+    <div style="font-weight:700;margin-top:4px">vs ${esc(m.opponent)}</div><div class="mut">${d}</div></div>
+    <div class="res ${cls}" title="Set vinti">${w} - ${l}</div></div>
+    <div class="sets">${setsOf(m).map((x, i) => `<span title="Set ${i + 1}">${x.us}-${x.them}</span>`).join("")}</div>
+    <div class="mut" style="margin-top:6px">Punti totali: ${pu} - ${pt}</div>
+    <div class="row" style="margin-top:10px;gap:8px"><button class="btn sec sm" data-editm="${m.id}">Modifica</button><button class="btn sec sm" data-delm="${m.id}">Elimina</button></div></div>`;
+  }).join("");
+  return `<div class="row" style="margin-bottom:10px"><h2 class="grow" style="margin:0">Partite disputate</h2><button class="btn" data-newm="1">+ Partita</button></div>
+  <div class="card stats"><div><b>${S.mt.length}</b><span class="mut">Giocate</span></div><div><b style="color:var(--ok)">${W}</b><span class="mut">Vinte</span></div><div><b style="color:var(--no)">${L}</b><span class="mut">Perse</span></div></div>` +
+  (cards || `<div class="empty card">Nessuna partita registrata. Premi “+ Partita” per inserire avversario, set e punti.</div>`);
+}
+
+function openM(m) {
+  S.editM = m ? m.id : "";
+  $("#m-h").textContent = m ? "Modifica partita" : "Nuova partita";
+  $("#m-opp").value = m ? m.opponent : "";
+  $("#m-date").value = m ? m.date : ymd(new Date());
+  for (let i = 1; i <= 5; i++) { const x = m ? setsOf(m)[i - 1] : null; $("#m-u" + i).value = x ? x.us : ""; $("#m-t" + i).value = x ? x.them : ""; }
+  $("#dlgM").showModal();
+}
+
 function viewTeam() {
   const past = S.ev.filter(isPast).length;
   return `<div class="row" style="margin-bottom:6px"><h2 class="grow" style="margin:0">Presenze della stagione</h2><button class="btn" data-addath="1">+ Atleti</button></div><p class="mut">Calcolate su ${past} eventi già svolti.</p>` +
@@ -195,7 +256,7 @@ function viewMe() {
 
 function render() {
   if (document.activeElement && /INPUT|SELECT/.test(document.activeElement.tagName) && S.tab === "me") return;
-  app.innerHTML = S.tab === "cal" ? viewCal() : S.tab === "team" ? viewTeam() : viewMe();
+  app.innerHTML = S.tab === "cal" ? viewCal() : S.tab === "match" ? viewMatch() : S.tab === "team" ? viewTeam() : viewMe();
   document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.t === S.tab));
 }
 
@@ -207,6 +268,9 @@ document.addEventListener("click", async ev => {
   const t = ev.target.closest("button"); if (!t) return;
   const D = t.dataset;
   if (D.t) { S.tab = D.t; return render(); }
+  if (D.newm) return openM(null);
+  if (D.editm) return openM(S.mt.find(x => x.id === D.editm));
+  if (D.delm) { const m = S.mt.find(x => x.id === D.delm); if (confirm("Eliminare la partita contro " + m.opponent + "?")) deleteDoc(doc(db, "matches", m.id)); return; }
   if (D.addath) return $("#dlgA").showModal();
   if (D.delath) { const a = S.ath.find(x => x.id === D.delath); if (confirm("Rimuovere " + a.name + " dalla squadra?")) { await deleteDoc(doc(db, "athletes", a.id)); if (S.me === a.id) { S.me = ""; localStorage.removeItem("me"); } } return; }
   if (D.mm) { S.m.setMonth(S.m.getMonth() + +D.mm); S.sel = ""; return render(); }
@@ -231,6 +295,27 @@ document.addEventListener("change", async ev => {
   if (ev.target.id === "pick" && ev.target.value) { S.me = ev.target.value; localStorage.setItem("me", S.me); ev.target.blur(); render(); }
   if (ev.target.id === "ph" && ev.target.files[0]) { S.photo = await resize(ev.target.files[0]); $("#prev").innerHTML = av({ name: "?", photo: S.photo }); }
 });
+$("#m-cancel").onclick = () => $("#dlgM").close();
+$("#m-save").onclick = async () => {
+  const opponent = $("#m-opp").value.trim(), date = $("#m-date").value;
+  if (!opponent) return toast("Inserisci l'avversario");
+  if (!date) return toast("Scegli la data");
+  const sets = [];
+  for (let i = 1; i <= 5; i++) {
+    const u = $("#m-u" + i).value, t = $("#m-t" + i).value;
+    if (u === "" && t === "") continue;
+    if (u === "" || t === "") return toast("Completa entrambi i punteggi del set " + i);
+    const a = parseInt(u, 10), b = parseInt(t, 10);
+    if (!(a >= 0 && b >= 0)) return toast("Punteggio non valido nel set " + i);
+    sets.push({ us: a, them: b });
+  }
+  if (!sets.length) return toast("Inserisci almeno un set");
+  const data = { opponent, date, sets };
+  $("#m-save").disabled = true;
+  try { if (S.editM) await setDoc(doc(db, "matches", S.editM), data); else await addDoc(colM, data); $("#dlgM").close(); toast("Partita salvata"); }
+  catch (e) { toast("Errore nel salvataggio: controlla le regole Firebase"); }
+  $("#m-save").disabled = false;
+};
 $("#a-cancel").onclick = () => $("#dlgA").close();
 $("#a-save").onclick = async () => {
   const have = new Set(S.ath.map(a => a.name.toLowerCase()));
